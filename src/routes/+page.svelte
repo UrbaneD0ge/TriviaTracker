@@ -1,5 +1,5 @@
 <h1>Trivia Tracker</h1>
-<h2>Current Score: <span id="score">0</span></h2>
+<h2>Current Score: <span id="score">{score.length}</span></h2>
 <table>
   <thead>
     <tr>
@@ -107,18 +107,18 @@
 </table>
 
 <script>
-    let score = document.querySelectorAll('input[type="checkbox"]');
-    score.forEach((checkbox) => {
-        checkbox.addEventListener('change', () => {
-            let totalScore = 0;
-            score.forEach((cb) => {
-                if (cb.checked) {
-                    totalScore++;
-                }
-            });
-            console.log(`Total Score: ${totalScore}`);
+    let score = [];
+    // Set score to the number of checkboxes that are checked
+    function updateScore() {
+        score = [];
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                score.push(1);
+            }
         });
-    });
+        return score.length;
+    }
 </script>
 
 <style>
@@ -140,4 +140,6 @@
   input[type="checkbox"] {
     transform: scale(2);
   }
+
+  /* When a row is active, scale the checkboxes */
 </style>
