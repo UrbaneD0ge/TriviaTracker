@@ -84,63 +84,65 @@
 </script>
 
 
-<h1>Trivia Tracker</h1>
-<h2>Current Score: <span id="score">{score}</span></h2>
-<table>
-  <thead>
-    <tr>
-      <th>Round</th>
-      <th>Q1</th>
-      <th>Q2</th>
-      <th>Q3</th>
-      <th>Q4</th>
-      <th>Q5</th>
-      <th>Q6</th>
-      <th>Q7</th>
-      <th>Q8</th>
-    </tr>
-  </thead>
-  <tbody>
-    {#each rounds as round, rIdx}
+<div>
+  <h1>Trivia Tracker</h1>
+  <h2>Current Score: <span id="score">{score}</span></h2>
+  <table>
+    <thead>
       <tr>
-        <td>
-          <input
-            type="radio"
-            name="doubledRound"
-            checked={selectedRound === round}
-            onchange={() => selectRound(round)}>
-            <label for="doubledRound-{round}"></label>
-          Round {round}</td>
-        {#each questions as question, qIdx}
+        <th></th>
+        <th>Q1</th>
+        <th>Q2</th>
+        <th>Q3</th>
+        <th>Q4</th>
+        <th>Q5</th>
+        <th>Q6</th>
+        <th>Q7</th>
+        <th>Q8</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each rounds as round, rIdx}
+        <tr>
           <td>
             <input
-              type="checkbox"
-              onclick={(e) => toggleIdx(rIdx * questions.length + qIdx, e.currentTarget)}
-            />
-          </td>
-        {/each}
-      </tr>
-    {/each}
-  </tbody>
-</table>
+              type="radio"
+              name="doubledRound"
+              checked={selectedRound === round}
+              onchange={() => selectRound(round)}>
+              <label for="doubledRound-{round}"></label>
+            R{round}</td>
+          {#each questions as question, qIdx}
+            <td>
+              <input
+                type="checkbox"
+                onclick={(e) => toggleIdx(rIdx * questions.length + qIdx, e.currentTarget)}
+              />
+            </td>
+          {/each}
+        </tr>
+      {/each}
+    </tbody>
+  </table>
 
-<button onclick={() => {
-  answers = Array.from({ length: rounds.length * questions.length }, () => 'indeterminate');
-  selectedRound = null;
-  saveAnswers();
-  score = 0;
-  // Reset all checkboxes in the DOM
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  checkboxes.forEach((checkbox) => {
-    checkbox.checked = false;
-    checkbox.indeterminate = true;
-  });
-  // Reset radio buttons
-  const radios = document.querySelectorAll('input[type="radio"]');
-  radios.forEach((radio) => {
-    radio.checked = false;
-  });
-}}>Reset Answers</button>
+  <button onclick={() => {
+    answers = Array.from({ length: rounds.length * questions.length }, () => 'indeterminate');
+    selectedRound = null;
+    saveAnswers();
+    score = 0;
+    // Reset all checkboxes in the DOM
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+      checkbox.indeterminate = true;
+    });
+    // Reset radio buttons
+    const radios = document.querySelectorAll('input[type="radio"]');
+    radios.forEach((radio) => {
+      radio.checked = false;
+    });
+  }}>Reset</button>
+</div>
 
 <style>
   table {
@@ -155,11 +157,12 @@
   }
 
   th {
-    background-color: #f2f2f2;
+    background-color: #848484;
   }
 
   input[type="checkbox"] {
-    transform: scale(3);
+    transform: scale(2);
+      margin: 5px;
   }
 
   input[type="checkbox"]:indeterminate {
@@ -174,5 +177,21 @@
     filter: invert(85%) sepia(83%) saturate(6726%) hue-rotate(360deg) brightness(111%) contrast(111%);
   }
 
-  /* When a row is active, scale the checkboxes */
+  div {
+    /* max-width: 95svw; */
+    /* padding: 10px; */
+    margin: auto;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+
+  }
 </style>
