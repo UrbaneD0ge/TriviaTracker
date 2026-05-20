@@ -84,7 +84,7 @@
 </script>
 
 
-<div>
+<div id="app">
   <h1>Trivia Tracker</h1>
   <h2>Current Score: <span id="score">{score}</span></h2>
   <table>
@@ -125,6 +125,7 @@
     </tbody>
   </table>
 
+  <div style="display: flex; gap: 10px; margin-top: 20px;">
   <button onclick={() => {
     answers = Array.from({ length: rounds.length * questions.length }, () => 'indeterminate');
     selectedRound = null;
@@ -142,9 +143,17 @@
       radio.checked = false;
     });
   }}>Reset</button>
+  <button id="youTube">
+    <a href="https://www.youtube.com/results?search_query=dirty+south+trivia+" target="_blank" rel="noopener noreferrer">YouTube</a>
+  </button>
+  <button id="dstLink">
+    <a href="https://www.dirtysouthtrivia.com/" target="_blank" rel="noopener noreferrer">DST Website</a>
+  </button>
+</div>
+  <!-- Weekly answer selector: -->
+<!-- #comp-mi2v68uj > p:nth-child(3) > span -->
 
-
-<footer>Made with spite by <a href="https://kipdunlap.me">Kip Dunlap</a></footer>
+<footer>Made with Svelte by <a href="https://kipdunlap.me">Kip Dunlap</a></footer>
 </div>
 
 <style>
@@ -180,7 +189,7 @@
     filter: invert(85%) sepia(83%) saturate(6726%) hue-rotate(360deg) brightness(111%) contrast(111%);
   }
 
-  div {
+  #app {
     /* max-width: 95svw; */
     /* padding: 10px; */
     margin: auto;
@@ -188,7 +197,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 90vh;
+    min-height: 80vh;
   }
 
   footer {
@@ -201,7 +210,10 @@
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+  }
 
+  h1, h2 {
+    margin: 5px 0;
   }
 
   a {
@@ -209,4 +221,22 @@
     text-decoration: none;
     font-weight: bold;
   }
+
+  #score {
+    font-size: 24px;
+    color: #2a5aca;
+  }
+
+  #youTube {
+    background-color: #FF0000;
+  }
+
+  #dstLink {
+    background-color: #429e63;
+  }
+
+  button a {
+    color: white;
+  }
+
 </style>
