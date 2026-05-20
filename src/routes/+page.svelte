@@ -18,7 +18,7 @@
     } else {
       score = checkedCount;
     }
-    console.log(score);
+    console.log(`Current score: ${score}`);
   });
 
   // On page load, load the answer array from localStorage and set the checkboxes accordingly.
@@ -38,7 +38,7 @@
       console.log('Loading saved answers from localStorage');
       const parsed = JSON.parse(savedAnswers);
       answers = parsed.answers ?? answers;
-      selectedRound = parsed.selectedRound ?? selectedRound;
+      if ('selectedRound' in parsed) selectedRound = parsed.selectedRound;
     }
     // Ensure DOM checkboxes and radio buttons reflect answers after mount/update
     requestAnimationFrame(() => {
@@ -54,7 +54,15 @@
       });
     });
     // Calculate initial score after loading answers
-    score = answers.filter((a) => a === 'checked').length;
+    if (selectedRound != null) {
+      const checkedCount = answers.filter((a) => a === 'checked').length;
+      const rowStart = (selectedRound - 1) * questions.length;
+      const rowEnd = rowStart + questions.length;
+      const selectedRowChecked = answers.slice(rowStart, rowEnd).filter((a) => a === 'checked').length;
+      score = checkedCount + selectedRowChecked;
+    } else {
+      score = answers.filter((a) => a === 'checked').length;
+    }
   });
 
   // cycle state: indeterminate -> checked -> unchecked -> indeterminate
@@ -69,7 +77,7 @@
     el.checked = next === 'checked';
     el.indeterminate = next === 'indeterminate';
     saveAnswers();
-    console.log(`Toggled index ${idx} to ${next}`);
+    // console.log(`Toggled index ${idx} to ${next}`);
     // Update score immediately after toggle
     score = answers.filter((a) => a === 'checked').length;
   }
@@ -101,6 +109,7 @@
             name="doubledRound"
             checked={selectedRound === round}
             onchange={() => selectRound(round)}>
+            <label for="doubledRound-{round}"></label>
           Round {round}</td>
         {#each questions as question, qIdx}
           <td>
@@ -117,6 +126,7 @@
 
 <button onclick={() => {
   answers = Array.from({ length: rounds.length * questions.length }, () => 'indeterminate');
+  selectedRound = null;
   saveAnswers();
   score = 0;
   // Reset all checkboxes in the DOM
@@ -149,7 +159,7 @@
   }
 
   input[type="checkbox"] {
-    transform: scale(2);
+    transform: scale(3);
   }
 
   input[type="checkbox"]:indeterminate {
