@@ -83,14 +83,14 @@
   }
 </script>
 
-
+<!-- HTML STARTS HERE -->
 <div id="app">
   <h1>Trivia Tracker</h1>
   <h2>Current Score: <span id="score">{score}</span></h2>
   <table>
     <thead>
       <tr>
-        <th></th>
+        <th>2X</th>
         <th>Q1</th>
         <th>Q2</th>
         <th>Q3</th>
@@ -150,7 +150,8 @@
     <a href="https://www.dirtysouthtrivia.com/" target="_blank" rel="noopener noreferrer">DST Website</a>
   </button>
 </div>
-  <!-- Weekly answer selector: -->
+
+<!-- Weekly answer selector: -->
 <!-- #comp-mi2v68uj > p:nth-child(3) > span -->
 
 <footer>Made with Svelte by <a href="https://kipdunlap.me">Kip Dunlap</a></footer>
@@ -205,22 +206,32 @@
     padding-top: 20px;
   }
 
+    h1, h2 {
+      margin: 5px 0;
+    }
+
   button {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-  }
-
-  h1, h2 {
-    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+/* give the button a little dimension with inset shadow */
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+    background-color: #2a5aca;
+    color: white;
+    font-weight: bold;
   }
 
   a {
     color: #2a5aca;
     text-decoration: none;
-    font-weight: bold;
   }
+
+    button a {
+      color: white;
+    }
 
   #score {
     font-size: 24px;
@@ -233,10 +244,6 @@
 
   #dstLink {
     background-color: #429e63;
-  }
-
-  button a {
-    color: white;
   }
 
 </style>
