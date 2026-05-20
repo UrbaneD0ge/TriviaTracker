@@ -142,6 +142,9 @@
       radio.checked = false;
     });
   }}>Reset</button>
+
+
+<footer>Made with spite by <a href="https://kipdunlap.me">Kip Dunlap</a></footer>
 </div>
 
 <style>
@@ -185,6 +188,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 90vh;
+  }
+
+  footer {
+    margin-top: auto;
+    padding-top: 20px;
   }
 
   button {
@@ -193,5 +202,11 @@
     font-size: 16px;
     cursor: pointer;
 
+  }
+
+  a {
+    color: #2a5aca;
+    text-decoration: none;
+    font-weight: bold;
   }
 </style>
