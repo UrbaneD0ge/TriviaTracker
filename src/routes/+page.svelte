@@ -173,6 +173,11 @@
     background-color: #848484;
   }
 
+  input[type="radio"] {
+    transform: scale(1.5);
+    /* margin: 5px; */
+  }
+
   input[type="checkbox"] {
     transform: scale(2);
       margin: 5px;
@@ -181,24 +186,15 @@
   input[type="checkbox"]:indeterminate {
     accent-color: #ccc;
   }
+
   input[type="checkbox"]:checked {
-    accent-color: green;
+    accent-color: #429e63;
     filter: invert(49%) sepia(65%) saturate(7149%) hue-rotate(92deg) brightness(89%) contrast(103%);
 }
+
   input[type="checkbox"]:not(:checked):not(:indeterminate) {
     accent-color: red;
     filter: invert(85%) sepia(83%) saturate(6726%) hue-rotate(360deg) brightness(111%) contrast(111%);
-  }
-
-  #app {
-    /* max-width: 95svw; */
-    /* padding: 10px; */
-    margin: auto;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 80vh;
   }
 
   footer {
@@ -206,9 +202,9 @@
     padding-top: 20px;
   }
 
-    h1, h2 {
-      margin: 5px 0;
-    }
+  h1, h2 {
+    margin: 5px 0;
+  }
 
   button {
     margin-top: 20px;
@@ -217,7 +213,7 @@
     cursor: pointer;
     border: none;
     border-radius: 5px;
-/* give the button a little dimension with inset shadow */
+    /* give the button a little dimension with inset shadow */
     box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
     background-color: #2a5aca;
     color: white;
@@ -229,13 +225,25 @@
     text-decoration: none;
   }
 
-    button a {
-      color: white;
+  button a {
+    color: white;
+  }
+
+    #app {
+      /* max-width: 95svw; */
+      /* padding: 10px; */
+      margin: auto;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 80vh;
     }
 
   #score {
     font-size: 24px;
-    color: #2a5aca;
+    color: #ffffff;
+    text-decoration: underline;
   }
 
   #youTube {
