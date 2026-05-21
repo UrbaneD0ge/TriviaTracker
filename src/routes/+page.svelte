@@ -109,15 +109,18 @@
               type="radio"
               name="doubledRound"
               checked={selectedRound === round}
-              onchange={() => selectRound(round)}>
+              onchange={() => selectRound(round)}><br>
               <label for="doubledRound-{round}"></label>
             R{round}</td>
           {#each questions as question, qIdx}
             <td>
-              <input
-                type="checkbox"
-                onclick={(e) => toggleIdx(rIdx * questions.length + qIdx, e.currentTarget)}
-              />
+              <label class="custom-checkbox">
+                <input
+                  type="checkbox"
+                  onclick={(e) => toggleIdx(rIdx * questions.length + qIdx, e.currentTarget)}
+                />
+                <span aria-hidden="true"></span>
+              </label>
             </td>
           {/each}
         </tr>
@@ -161,16 +164,20 @@
   table {
     border-collapse: collapse;
     width: 100%;
+    height: 60svh;
   }
 
   th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border: 0px none #ddd;
+    padding: 0px;
     text-align: center;
   }
 
   th {
-    background-color: #848484;
+    background-color: #646464;
+    border-radius: 5px;
+    margin: 0;
+    padding: 2px 0;
   }
 
   input[type="radio"] {
@@ -178,23 +185,78 @@
     /* margin: 5px; */
   }
 
-  input[type="checkbox"] {
-    transform: scale(2);
-      margin: 5px;
+  .custom-checkbox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    position: relative;
   }
 
-  input[type="checkbox"]:indeterminate {
-    accent-color: #ccc;
+  .custom-checkbox input[type="checkbox"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    margin: 0;
+    cursor: pointer;
+    z-index: 2;
+    appearance: none;
+    -webkit-appearance: none;
   }
 
-  input[type="checkbox"]:checked {
-    accent-color: #429e63;
-    filter: invert(49%) sepia(65%) saturate(7149%) hue-rotate(92deg) brightness(89%) contrast(103%);
-}
+  .custom-checkbox span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 2px solid #ab0000;
+    border-radius: 8px;
+    background: #ab0000;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    pointer-events: none;
+  }
 
-  input[type="checkbox"]:not(:checked):not(:indeterminate) {
-    accent-color: red;
-    filter: invert(85%) sepia(83%) saturate(6726%) hue-rotate(360deg) brightness(111%) contrast(111%);
+  .custom-checkbox span::after {
+    content: '';
+    display: block;
+    transform: scale(0);
+    transition: transform .35s ease-in-out;
+  }
+
+  .custom-checkbox input[type="checkbox"]:not(:checked) + span::after {
+    content: 'X';
+    color: white;
+    font-size: 28px;
+    transform: scale(1);
+    line-height: 1;
+  }
+
+  .custom-checkbox input[type="checkbox"]:checked + span {
+    border-color: #429e63;
+    background-color: #429e63;
+  }
+
+  .custom-checkbox input[type="checkbox"]:checked + span::after {
+    content: '✔';
+    color: white;
+    font-size: 22px;
+    transform: scale(1);
+    line-height: 1;
+  }
+
+  .custom-checkbox input[type="checkbox"]:indeterminate + span {
+    border-color: #ccc;
+    background-color: #555;
+  }
+
+  .custom-checkbox input[type="checkbox"]:indeterminate + span::after {
+    content: '';
+    width: 14px;
+    height: 3px;
+    background-color: white;
+    transform: scale(1);
   }
 
   footer {
@@ -229,16 +291,16 @@
     color: white;
   }
 
-    #app {
-      /* max-width: 95svw; */
-      /* padding: 10px; */
-      margin: auto;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 80vh;
-    }
+  #app {
+    /* max-width: 95svw; */
+    /* padding: 10px; */
+    margin: auto;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 80vh;
+  }
 
   #score {
     font-size: 24px;
