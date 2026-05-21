@@ -16,4 +16,5 @@
 "dir":"auto","lang":"en-US",
 "name":"Trivia Tracker",
 "short_name":"Trivia Tracker",
-"start_url":"https://trivia-tracker-alpha.vercel.app/","scope":"https://trivia-tracker-alpha.vercel.app/"}
+"start_url":"https://trivia-tracker-alpha.vercel.app/",
+"scope":"https://trivia-tracker-alpha.vercel.app/"}
