@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
 
-  const rounds = Array.from({ length: 8 }, (_, i) => i + 1);
+  const rounds = Array.from({ length: 6 }, (_, i) => i + 1);
   const questions = Array.from({ length: 8 }, (_, i) => i + 1);
   // answers can be 'checked' | 'unchecked' | 'indeterminate'
   let answers = Array.from({ length: rounds.length * questions.length }, () => 'indeterminate');
